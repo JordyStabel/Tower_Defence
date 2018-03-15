@@ -4,9 +4,10 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour {
 
     public Color hoverColor;
+    public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
 
-    [Header("Optional (default 'free' turret)")]
+    [Header("Optional")]
     public GameObject turret;
 
     private Renderer rend;
@@ -68,8 +69,15 @@ public class Node : MonoBehaviour {
         if (!buildManager.isTurretSelected)
             return;
 
-        //Highlights Node with different color
-        rend.material.color = hoverColor;
+        //Highlights Node with different color, depending on the amount of money
+        if (buildManager.HasMoney)
+        {
+            rend.material.color = hoverColor;
+        }
+        else
+        {
+            rend.material.color = notEnoughMoneyColor;
+        }
     }
 
     /// <summary>

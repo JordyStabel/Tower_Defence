@@ -28,9 +28,10 @@ public class WaveSpawner : MonoBehaviour {
 
         //Decrease countDown with the time past between frames
         countDown -= Time.deltaTime;
+        countDown = Mathf.Clamp(countDown, 0f, Mathf.Infinity);
 
-        //Set timer text to a rounded number of the countDown
-        waveCountdownText.text = Mathf.Round(countDown).ToString();
+        //Set timer text equal to the countDown
+        waveCountdownText.text = string.Format("{0:00.00}", countDown);
     }
 
     /// <summary>
