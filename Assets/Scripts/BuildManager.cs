@@ -24,6 +24,8 @@ public class BuildManager : MonoBehaviour {
     public GameObject standardTurretPrefab;
     public GameObject missileLauncherPrefab;
 
+    public GameObject buildEffect;
+
     private TurretBlueprint turretToBuild;
 
     //Is there a turret selected?
@@ -54,6 +56,9 @@ public class BuildManager : MonoBehaviour {
         //Set the Node turret equal to the just created turret object
         node.turret = turret;
 
+        //Create a buildeffect object that can be destroyed again after 5 seconds
+        GameObject effect = (GameObject)Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
         Debug.Log("Turret build! Money left: " + PlayerStats.Money);
     }
 
