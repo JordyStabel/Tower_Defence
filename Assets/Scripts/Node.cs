@@ -6,7 +6,8 @@ public class Node : MonoBehaviour {
     public Color hoverColor;
     public Vector3 positionOffset;
 
-    private GameObject turret;
+    [Header("Optional (default 'free' turret)")]
+    public GameObject turret;
 
     private Renderer rend;
     private Color startColor;
@@ -22,6 +23,15 @@ public class Node : MonoBehaviour {
     }
 
     /// <summary>
+    /// Returns to correct position to place a turret on a Node
+    /// </summary>
+    /// <returns>Correct position</returns>
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position + positionOffset;
+    }
+
+    /// <summary>
     /// Build new turret if turret is selected & Node is available
     /// </summary>
     void OnMouseDown()
@@ -31,7 +41,7 @@ public class Node : MonoBehaviour {
             return;
 
         //Cancels action when there is no turret selected
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.isTurretSelected)
             return;
 
         //Cancels action if there is already a turret on the Node
@@ -40,12 +50,9 @@ public class Node : MonoBehaviour {
             Debug.Log("There is already a turret on the node.");
             return;
         }
-        else
-        {
-            //Builds turret
-            GameObject turretToBuild = buildManager.GetTurretToBuild();
-            turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-        }
+
+        //Build a turret on current Node
+        buildManager.BuildTurretOnNode(this);
     }
 
     /// <summary>
@@ -58,7 +65,7 @@ public class Node : MonoBehaviour {
             return;
 
         //Cancels action when there is no turret selected
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.isTurretSelected)
             return;
 
         //Highlights Node with different color

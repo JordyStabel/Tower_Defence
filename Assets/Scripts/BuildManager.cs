@@ -24,23 +24,28 @@ public class BuildManager : MonoBehaviour {
     public GameObject standardTurretPrefab;
     public GameObject missileLauncherPrefab;
 
-    private GameObject turretToBuild;
+    private TurretBlueprint turretToBuild;
+
+    //Is there a turret selected?
+    public bool isTurretSelected { get { return turretToBuild != null; } }
 
     /// <summary>
-    /// Returns the turret to build (current seleceted turret)
+    /// Build a turret on a selected Node
     /// </summary>
-    /// <returns>Selected turret</returns>
-    public GameObject GetTurretToBuild()
+    /// <param name="node"></param>
+    public void BuildTurretOnNode (Node node)
     {
-        return turretToBuild;
+        //Create new turret at the location of the current Node with no rotation
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        //Set the Node turret equal to the just created turret object
+        node.turret = turret;
     }
 
     /// <summary>
-    /// Sets turret to build (current selected turret)
+    /// Set turretToBuild to input turretBlueprint
     /// </summary>
-    /// <param name="turret"></param>
-    public void SetTurretToBuild(GameObject turret)
+    public void SelectTurretToBuild(TurretBlueprint turretBlueprint)
     {
-        turretToBuild = turret;
+        turretToBuild = turretBlueprint;
     }
 }
