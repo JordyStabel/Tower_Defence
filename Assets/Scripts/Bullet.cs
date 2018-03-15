@@ -73,6 +73,8 @@ public class Bullet : MonoBehaviour {
     void Damage (Transform enemy)
     {
         Destroy(enemy.gameObject);
+        //Add $25 per killed Enemy
+        PlayerStats.Money += 25;
     }
 
     /// <summary>
