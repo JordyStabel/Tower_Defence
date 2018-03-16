@@ -48,6 +48,8 @@ public class WaveSpawner : MonoBehaviour {
             yield return new WaitForSeconds(0.5f);
         }
         waveNumber++;
+        //Temp increase time betweenwaves so enemies have enough time to spawn
+        timeBetweenWaves++;
     }
 
     /// <summary>

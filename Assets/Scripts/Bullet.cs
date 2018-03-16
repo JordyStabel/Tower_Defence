@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour {
     private Transform target;
 
     public float speed = 70f;
+    public int damage = 50;
     public float explosiveRadius = 0f;
     public GameObject impactEffect;
     
@@ -72,9 +73,15 @@ public class Bullet : MonoBehaviour {
     /// <param name="enemy"></param>
     void Damage (Transform enemy)
     {
-        Destroy(enemy.gameObject);
-        //Add $25 per killed Enemy
-        PlayerStats.Money += 25;
+        //Gets the enemy component
+        Enemy e = enemy.GetComponent<Enemy>();
+
+        //Check if there is a enemy
+        if (e != null)
+        {
+            //Aply the damage to enemy
+            e.TakeDamage(damage);
+        }
     }
 
     /// <summary>
