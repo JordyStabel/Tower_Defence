@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    private bool isGameEnded = false;
+    public static bool GameIsOver;
+
+    public GameObject gameOverUI;
+
+    void Start()
+    {
+        GameIsOver = false;
+    }
 	
 	// Checks if there are enough lives left
 	void Update () {
 
         //If game has ended return
-        if (isGameEnded)
+        if (GameIsOver)
             return;
 
         //Else deduct lives
@@ -23,8 +30,8 @@ public class GameManager : MonoBehaviour {
     //Ends the game
     private void EndGame()
     {
-        Debug.Log("Game Over!");
-        isGameEnded = true;
-        //TODO: Restart the game or something else
+        //Game over plus UI screen
+        GameIsOver = true;
+        gameOverUI.SetActive(true);
     }
 }

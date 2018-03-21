@@ -13,6 +13,13 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        //Disable the camera when game is over
+        if (GameManager.GameIsOver)
+        {
+            this.enabled = false;
+            return;
+        }
+
         //Toggle movementAllowed when 'Escape-key' is pressed
         if (Input.GetKeyDown (KeyCode.Escape))
         {

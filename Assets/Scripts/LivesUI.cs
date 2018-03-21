@@ -7,6 +7,10 @@ public class LivesUI : MonoBehaviour {
 	
 	//Set the lives text equal to the amount of lives that the player has
 	void Update () {
-        livesText.text = PlayerStats.Lives + " LIVES";
+
+        if (!GameManager.GameIsOver)
+        {
+            livesText.text = PlayerStats.Lives + " LIVES";
+        }
 	}
 }
