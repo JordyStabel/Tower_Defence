@@ -20,10 +20,6 @@ public class BuildManager : MonoBehaviour {
         instance = this;
     }
 
-    //References to all Turrets
-    public GameObject standardTurretPrefab;
-    public GameObject missileLauncherPrefab;
-
     public GameObject buildEffect;
 
     private TurretBlueprint turretToBuild;

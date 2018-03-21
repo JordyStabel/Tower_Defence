@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7d3aff4e1e20b93498943b49f3310482
-timeCreated: 1521201914
+guid: f83a1a300dd1678499321a854f67112c
+timeCreated: 1521640712
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -27,7 +27,7 @@ ModelImporter:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
