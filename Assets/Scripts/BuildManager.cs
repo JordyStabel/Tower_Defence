@@ -23,6 +23,9 @@ public class BuildManager : MonoBehaviour {
     public GameObject buildEffect;
 
     private TurretBlueprint turretToBuild;
+    private Node selectedNode;
+
+    public TurretUI turretUI;
 
     //Is there a turret selected?
     public bool isTurretSelected { get { return turretToBuild != null; } }
@@ -64,5 +67,29 @@ public class BuildManager : MonoBehaviour {
     public void SelectTurretToBuild(TurretBlueprint turretBlueprint)
     {
         turretToBuild = turretBlueprint;
+        DeselectNode();
+    }
+
+    /// <summary>
+    /// Set selecetedNode to input node
+    /// </summary>
+    public void SelectNode(Node node)
+    {
+        //Hides UI when you double select a Turret
+        if (selectedNode == node)
+        {
+            DeselectNode();
+            return;
+        }
+        selectedNode = node;
+        turretToBuild = null;
+
+        turretUI.SetTarget(node);
+    }
+
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        turretUI.Hide();
     }
 }
