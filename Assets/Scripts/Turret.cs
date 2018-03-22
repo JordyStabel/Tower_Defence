@@ -88,7 +88,6 @@ public class Turret : MonoBehaviour {
                     impactEffect.Stop();
                 }
             }
-
             return;
         }
 

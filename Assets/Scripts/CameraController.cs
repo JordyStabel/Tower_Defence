@@ -62,6 +62,18 @@ public class CameraController : MonoBehaviour {
             transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
         }
 
+        ////Turn the camera
+        //if (Input.GetKey("q"))
+        //{
+        //    Vector3 rotateValue = new Vector3(panSpeed * Time.deltaTime, -0.05f);
+        //    transform.eulerAngles = transform.eulerAngles - rotateValue;
+        //}
+        //if (Input.GetKey("e"))
+        //{
+        //    Vector3 rotateValue = new Vector3(panSpeed * Time.deltaTime, 1);
+        //    transform.eulerAngles = transform.eulerAngles - rotateValue;
+        //}
+
         //Get scrollwheel input
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
