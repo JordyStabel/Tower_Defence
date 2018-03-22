@@ -13,6 +13,20 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray selectEnemy = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(selectEnemy, out hit, 1500f))
+            {
+                if (hit.collider.tag == "Enemy")
+                {
+                    Debug.Log("Raycast worked!");
+                    hit.collider.GetComponent<Enemy>().TakeDamage(1000);
+                }
+            }
+        }
+
         //Disable the camera when game is over
         if (GameManager.GameIsOver)
         {

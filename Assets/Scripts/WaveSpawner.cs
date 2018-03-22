@@ -51,6 +51,12 @@ public class WaveSpawner : MonoBehaviour {
         PlayerStats.wavesSurvived++;
         //Temp increase time betweenwaves so enemies have enough time to spawn
         timeBetweenWaves++;
+
+        //Increase healthpool by x % every wave
+        Enemy.startHealth = (Enemy.startHealth * 1.10f);
+
+        //Increase the killreward for killing a enemy each wave
+        Enemy.startKillReward++;
     }
 
     /// <summary>

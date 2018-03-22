@@ -3,16 +3,24 @@
 public class Enemy : MonoBehaviour {
 
     public float startSpeed = 10f;
+    public static float startHealth = 100f;
+    public static int startKillReward = 1;
+
     [HideInInspector]
     public float speed;
-    public float health = 100;
-    public int killReward = 25;
+    public float health;
+    public int killReward;
+
+    float red = 0;
+    float maxRed = 1;
 
     public GameObject deathEffect;
 
     void Start()
     {
         speed = startSpeed;
+        health = startHealth;
+        killReward = startKillReward;
     }
 
     /// <summary>
@@ -21,6 +29,16 @@ public class Enemy : MonoBehaviour {
     /// <param name="amount"></param>
     public void TakeDamage(float amount)
     {
+        //Change color
+        float percentageHit = (amount / health);
+
+        red = red + (maxRed * percentageHit);
+        maxRed -= (maxRed * percentageHit);
+
+        //Go from 'Enemy blue' to pinkish purple, depending on the health
+        Color newColor = new Color(red, (1 - red), 1, 1);
+        gameObject.GetComponent<Renderer>().material.color = newColor;
+
         health -= amount;
 
         if (health <= 0)
