@@ -8,7 +8,9 @@ public class Enemy : MonoBehaviour {
 
     [HideInInspector]
     public float speed;
+    [HideInInspector]
     public float health;
+    [HideInInspector]
     public int killReward;
 
     float red = 0;

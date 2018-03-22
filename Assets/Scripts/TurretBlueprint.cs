@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 /// <summary>
@@ -12,4 +10,7 @@ public class TurretBlueprint
     //Requires turret prefab & cost
     public GameObject prefab;
     public int cost;
+
+    public GameObject upgradedPrefab;
+    public int upgradeCost;
 }

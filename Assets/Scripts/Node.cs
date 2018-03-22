@@ -7,8 +7,10 @@ public class Node : MonoBehaviour {
     public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
 
-    [Header("Optional")]
+    [HideInInspector]
     public GameObject turret;
+    public TurretBlueprint turretBlueprint;
+    public bool isUpgraded = false;
 
     private Renderer rend;
     private Color startColor;
@@ -54,7 +56,67 @@ public class Node : MonoBehaviour {
             return;
 
         //Build a turret on current Node
-        buildManager.BuildTurretOnNode(this);
+        BuildTurret(buildManager.GetTurretToBuild());
+    }
+
+    /// <summary>
+    /// Build a turret on a selected Node
+    /// </summary>
+    /// <param name="node"></param>
+    void BuildTurret(TurretBlueprint blueprint)
+    {
+        //Checks if the player has enough money to build a turret
+        if (PlayerStats.Money < blueprint.cost)
+        {
+            //TODO: Add a visual component to alert the player
+            Debug.Log("Not enough money to build turret");
+            return;
+        }
+
+        //Deduct the cost
+        PlayerStats.Money -= blueprint.cost;
+
+        //Create new turret at the location of the current Node with no rotation
+        GameObject _turret = (GameObject)Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
+        //Set the Node turret equal to the just created turret object
+        turret = _turret;
+
+        turretBlueprint = blueprint;
+
+        //Create a buildeffect object that can be destroyed again after 5 seconds
+        GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+        Debug.Log("Turret build!");
+    }
+
+    public void UpgradeTurret()
+    {
+        //Checks if the player has enough money to build a turret
+        if (PlayerStats.Money < turretBlueprint.upgradeCost)
+        {
+            //TODO: Add a visual component to alert the player
+            Debug.Log("Not enough money to upgrade turret");
+            return;
+        }
+
+        //Deduct the cost
+        PlayerStats.Money -= turretBlueprint.upgradeCost;
+
+        //Get rid of the old turret
+        Destroy(turret);
+
+        //Create new turret at the location of the current Node with no rotation
+        GameObject _turret = (GameObject)Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        //Set the Node turret equal to the just created turret object
+        turret = _turret;
+
+        //Create a buildeffect object that can be destroyed again after 5 seconds
+        GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+
+        isUpgraded = true;
+
+        Debug.Log("Turret upgraded!");
     }
 
     /// <summary>
