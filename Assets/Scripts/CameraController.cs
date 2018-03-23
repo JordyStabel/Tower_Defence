@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour {
         }
 
         //Toggle movementAllowed when 'Escape-key' is pressed
-        if (Input.GetKeyDown (KeyCode.Escape))
+        if (Input.GetKeyDown (KeyCode.C))
         {
             movementAllowed = !movementAllowed;
         }
