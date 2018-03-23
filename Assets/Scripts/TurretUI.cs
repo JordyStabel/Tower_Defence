@@ -6,6 +6,7 @@ public class TurretUI : MonoBehaviour {
     public GameObject UI;
 
     public Text upgradeCost;
+    public Text sellValue;
     public Button upgradeButton;
 
     private Node target;
@@ -14,6 +15,7 @@ public class TurretUI : MonoBehaviour {
     {
         target = _target;
         transform.position = target.GetBuildPosition();
+        sellValue.text = "$" + target.turretBlueprint.GetSellValue();
 
         if (!target.isUpgraded)
         {
@@ -38,6 +40,12 @@ public class TurretUI : MonoBehaviour {
     public void Upgrade()
     {
         target.UpgradeTurret();
+        BuildManager.instance.DeselectNode();
+    }
+
+    public void Sell()
+    {
+        target.SellTurret();
         BuildManager.instance.DeselectNode();
     }
 }

@@ -9,7 +9,9 @@ public class Node : MonoBehaviour {
 
     [HideInInspector]
     public GameObject turret;
+    [HideInInspector]
     public TurretBlueprint turretBlueprint;
+    [HideInInspector]
     public bool isUpgraded = false;
 
     private Renderer rend;
@@ -32,6 +34,24 @@ public class Node : MonoBehaviour {
     public Vector3 GetBuildPosition()
     {
         return transform.position + positionOffset;
+    }
+
+    /// <summary>
+    /// Sell a selected turret
+    /// </summary>
+    public void SellTurret()
+    {
+        PlayerStats.Money += turretBlueprint.GetSellValue();
+
+        //Create a selleffect object
+        GameObject sellEffect = (GameObject)Instantiate(buildManager.sellEffect, GetBuildPosition(), Quaternion.identity);
+        GameObject turretDestroyEffect = (GameObject)Instantiate(buildManager.destroyEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(sellEffect, 5f);
+        Destroy(turretDestroyEffect, 5f);
+        Debug.Log("Turret sold!");
+
+        Destroy(turret);
+        turretBlueprint = null;
     }
 
     /// <summary>
