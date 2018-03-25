@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour {
 
     public float startSpeed = 10f;
+    public float startHealthInspector = 100f;
     public static float startHealth = 100f;
     public static int startKillReward = 1;
 
@@ -21,12 +22,14 @@ public class Enemy : MonoBehaviour {
 
     [Header("Unity Stuff")]
     public Image healthBar;
+    public Text healthAmountText;
 
     void Start()
     {
         speed = startSpeed;
         health = startHealth;
         killReward = startKillReward;
+        healthAmountText.text = health.ToString("n0");
     }
 
     /// <summary>
@@ -52,6 +55,9 @@ public class Enemy : MonoBehaviour {
         //Change healthbar fill amount
         healthBar.fillAmount = health / startHealth;
 
+        //Change healthAmountText
+        healthAmountText.text = health.ToString("n0");
+
         if (health <= 0)
         {
             Die();
@@ -73,10 +79,13 @@ public class Enemy : MonoBehaviour {
     void Die()
     {
         PlayerStats.Money += killReward;
+        Debug.Log(killReward);
 
         //Create new death effect object at location of the enemy
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
+
+        WaveSpawner.enemyCount--;
 
         Destroy(gameObject);
     }

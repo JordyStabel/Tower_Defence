@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour {
 
-    public Transform enemyPrefab;
+    public static int enemyCount = 0;
+    public Wave[] waves;
     public Transform spawnPoint;
 
     public float timeBetweenWaves = 5f;
@@ -12,18 +13,24 @@ public class WaveSpawner : MonoBehaviour {
 
     public Text waveCountdownText;
 
-    private int waveNumber = 1;
+    private int waveNumber = 0;
+    private int waveMultiplier = 1;
 
     /// <summary>
     /// Create new waves of enemies
     /// </summary>
     void Update()
     {
+        //Don't spawn enemies before all previous enemies are destroyed
+        if (enemyCount > 0)
+            return;
+
         //Only create a wave if the timer <= 0
         if (countDown <= 0f)
         {
             StartCoroutine(SpawnWave());
             countDown = timeBetweenWaves;
+            return;
         }
 
         //Decrease countDown with the time past between frames
@@ -40,30 +47,39 @@ public class WaveSpawner : MonoBehaviour {
     /// <returns>current waveNumber</returns>
     IEnumerator SpawnWave()
     {
+        //Selects a wave depending on the wavenumber
+        Wave wave = waves[waveNumber];
+
         //Spawn the same amoun of enemies as the current waveNumber
-        for (int i = 0; i < waveNumber; i++)
+        for (int i = 0; i < (wave.enemyCount * waveMultiplier); i++)
         {
-            SpawnEnemy();
+            SpawnEnemy(wave.enemy);
             //Wait 0.5 between spawning (so they aren't on top of each other)
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f / wave.rate);
         }
-        waveNumber++;
-        PlayerStats.wavesSurvived++;
-        //Temp increase time betweenwaves so enemies have enough time to spawn
-        timeBetweenWaves++;
 
         //Increase healthpool by x % every wave
         Enemy.startHealth = (Enemy.startHealth * 1.10f);
 
         //Increase the killreward for killing a enemy each wave
         Enemy.startKillReward++;
+
+        waveNumber++;
+        PlayerStats.wavesSurvived++;
+        if (waveNumber == waves.Length)
+        {
+            waveNumber = 0;
+            waveMultiplier++;
+            //TODO: Make more levels and load the next level
+        }
     }
 
     /// <summary>
     /// Create new enemy object at the starting point
     /// </summary>
-    void SpawnEnemy()
+    void SpawnEnemy(GameObject enemy)
     {
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        enemyCount++;
     }
 }

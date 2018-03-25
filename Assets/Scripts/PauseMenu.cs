@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour {
     public string mainMenu = "MainMenu";
     public SceneFader sceneFader;
 
+    private bool isSlowMotion = false;
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -14,9 +16,14 @@ public class PauseMenu : MonoBehaviour {
         {
             Toggle();
         }
+        //Slowdown time --> Just for testing
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ToggleSlowMotion();
+        }
+    }
 
-	}
-
+    //Toggle time on and off
     public void Toggle()
     {
         //Flip the isActive state of the UI object
@@ -26,6 +33,23 @@ public class PauseMenu : MonoBehaviour {
         if (UI.activeSelf)
         {
             Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
+    //Toggle time on and off
+    public void ToggleSlowMotion()
+    {
+        //Flip the isSlowMotion bool
+        isSlowMotion = !isSlowMotion;
+
+        //Actually pause and unpause the game
+        if (isSlowMotion)
+        {
+            Time.timeScale = 0.35f;
         }
         else
         {
