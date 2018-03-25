@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class Enemy : MonoBehaviour {
 
     public GameObject deathEffect;
 
+    [Header("Unity Stuff")]
+    public Image healthBar;
+
     void Start()
     {
         speed = startSpeed;
@@ -31,6 +35,9 @@ public class Enemy : MonoBehaviour {
     /// <param name="amount"></param>
     public void TakeDamage(float amount)
     {
+        health -= amount;
+
+        #region Color change effect for enemies, self made
         //Change color
         float percentageHit = (amount / health);
 
@@ -40,8 +47,10 @@ public class Enemy : MonoBehaviour {
         //Go from 'Enemy blue' to pinkish purple, depending on the health
         Color newColor = new Color(red, (1 - red), 1, 1);
         gameObject.GetComponent<Renderer>().material.color = newColor;
+        #endregion
 
-        health -= amount;
+        //Change healthbar fill amount
+        healthBar.fillAmount = health / startHealth;
 
         if (health <= 0)
         {
