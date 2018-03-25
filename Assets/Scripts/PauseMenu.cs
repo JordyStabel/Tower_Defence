@@ -4,18 +4,20 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
 
     public GameObject UI;
+    public string mainMenu = "MainMenu";
+    public SceneFader sceneFader;
 
 	// Update is called once per frame
 	void Update () {
 		
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
-            TogglePauseMenu();
+            Toggle();
         }
 
 	}
 
-    public void TogglePauseMenu()
+    public void Toggle()
     {
         //Flip the isActive state of the UI object
         UI.SetActive(!UI.activeSelf);
@@ -34,12 +36,13 @@ public class PauseMenu : MonoBehaviour {
     public void Retry()
     {
         //Reload the current scene
-        TogglePauseMenu();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Toggle();
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void Menu()
     {
-        Debug.Log("Go to menu!");
+        Toggle();
+        sceneFader.FadeTo(mainMenu);
     }
 }
