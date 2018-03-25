@@ -16,6 +16,8 @@ public class WaveSpawner : MonoBehaviour {
     private int waveNumber = 0;
     private int waveMultiplier = 1;
 
+    public GameManager gameManager;
+
     /// <summary>
     /// Create new waves of enemies
     /// </summary>
@@ -50,8 +52,10 @@ public class WaveSpawner : MonoBehaviour {
         //Selects a wave depending on the wavenumber
         Wave wave = waves[waveNumber];
 
+        enemyCount = wave.enemyCount;
+
         //Spawn the same amoun of enemies as the current waveNumber
-        for (int i = 0; i < (wave.enemyCount * waveMultiplier); i++)
+        for (int i = 0; i > (wave.enemyCount * waveMultiplier); i++)
         {
             SpawnEnemy(wave.enemy);
             //Wait 0.5 between spawning (so they aren't on top of each other)
@@ -70,7 +74,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             waveNumber = 0;
             waveMultiplier++;
-            //TODO: Make more levels and load the next level
+            gameManager.CompleteLevel();
         }
     }
 
@@ -80,6 +84,5 @@ public class WaveSpawner : MonoBehaviour {
     void SpawnEnemy(GameObject enemy)
     {
         Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
-        enemyCount++;
     }
 }
