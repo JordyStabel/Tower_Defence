@@ -4,14 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
-    public Text waveCount;
     public string menuScene = "MainMenu";
     public SceneFader sceneFader;
-
-    void OnEnable()
-    {
-        waveCount.text = PlayerStats.wavesSurvived.ToString();
-    }
 
     public void Retry()
     {

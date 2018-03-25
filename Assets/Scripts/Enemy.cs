@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour {
     public Image healthBar;
     public Text healthAmountText;
 
+    private bool isDead = false;
+
     void Start()
     {
         speed = startSpeed;
@@ -58,7 +60,7 @@ public class Enemy : MonoBehaviour {
         //Change healthAmountText
         healthAmountText.text = health.ToString("n0");
 
-        if (health <= 0)
+        if (health <= 0 || !isDead)
         {
             Die();
         }
@@ -78,6 +80,8 @@ public class Enemy : MonoBehaviour {
     /// </summary>
     void Die()
     {
+        isDead = true;
+
         PlayerStats.Money += killReward;
         Debug.Log(killReward);
 

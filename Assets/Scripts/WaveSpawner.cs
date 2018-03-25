@@ -27,6 +27,13 @@ public class WaveSpawner : MonoBehaviour {
         if (enemyCount > 0)
             return;
 
+        if (waveNumber == waves.Length)
+        {
+            waveNumber = 0;
+            waveMultiplier++;
+            gameManager.CompleteLevel();
+        }
+
         //Only create a wave if the timer <= 0
         if (countDown <= 0f)
         {
@@ -68,14 +75,9 @@ public class WaveSpawner : MonoBehaviour {
         //Increase the killreward for killing a enemy each wave
         Enemy.startKillReward++;
 
-        waveNumber++;
         PlayerStats.wavesSurvived++;
-        if (waveNumber == waves.Length)
-        {
-            waveNumber = 0;
-            waveMultiplier++;
-            gameManager.CompleteLevel();
-        }
+
+        waveNumber++;
     }
 
     /// <summary>
