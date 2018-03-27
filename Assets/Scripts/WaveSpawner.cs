@@ -62,7 +62,7 @@ public class WaveSpawner : MonoBehaviour {
         enemyCount = wave.enemyCount;
 
         //Spawn the same amoun of enemies as the current waveNumber
-        for (int i = 0; i > (wave.enemyCount * waveMultiplier); i++)
+        for (int i = 0; i < (wave.enemyCount * waveMultiplier); i++)
         {
             SpawnEnemy(wave.enemy);
             //Wait 0.5 between spawning (so they aren't on top of each other)
