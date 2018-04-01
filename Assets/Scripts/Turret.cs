@@ -15,8 +15,12 @@ public class Turret : MonoBehaviour {
     private float fireCountdown = 0f;
     public GameObject bulletPrefab;
 
+    [Header("Use raycast")]
+    public bool useRaycast = false;
+    public float damage = 5;
+
     [Header("Use Laser")]
-    public bool userLaser = false;
+    public bool useLaser = false;
     public LineRenderer lineRenderer;
     public ParticleSystem impactEffect;
     public Light impactLight;
@@ -29,9 +33,10 @@ public class Turret : MonoBehaviour {
     public float turnSpeed = 10f;
 
     public Transform firePoint;
+    public GameObject muzzleFlash;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
 	}
@@ -79,7 +84,7 @@ public class Turret : MonoBehaviour {
         //Do nothing if target there is no target
 		if (target == null)
         {
-            if (userLaser)
+            if (useLaser)
             {
                 if (lineRenderer.enabled)
                 {
@@ -93,7 +98,7 @@ public class Turret : MonoBehaviour {
 
         LockOnTarget();
 
-        if (userLaser)
+        if (useLaser)
         {
             Laser();
         }
@@ -102,7 +107,14 @@ public class Turret : MonoBehaviour {
             //Only shoot if fireCountdown <= 0 (creates a firerate)
             if (fireCountdown <= 0f)
             {
-                Shoot();
+                if (!useRaycast)
+                {
+                    Shoot();
+                }
+                else
+                {
+                    ShootRaycast();
+                }
                 fireCountdown = 1f / fireRate;
             }
             //Decrease fireCountdown with the time it took between frames
@@ -163,6 +175,25 @@ public class Turret : MonoBehaviour {
         if (bullet != null)
         {
             bullet.Lock_On(target);
+        }
+    }
+
+    void ShootRaycast()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(firePoint.transform.position, firePoint.transform.forward, out hit, range))
+        {
+            //Visual effect of bullet impact
+            GameObject effectInstance = (GameObject)Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
+            //Max duration of the animation
+            Destroy(effectInstance, 1f);
+
+            //Make sure the ray hit a enemy
+            if (hit.collider.tag == "Enemy")
+            {
+                //Get the enemy component and give it damage
+                hit.collider.GetComponent<Enemy>().TakeDamage(damage);
+            }
         }
     }
 }
