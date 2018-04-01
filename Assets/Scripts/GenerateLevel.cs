@@ -23,8 +23,8 @@ public class GenerateLevel : MonoBehaviour
 
     public void generateLevel()
     {
-        int width = 10;
-        int height = 10;
+        int width = 20;
+        int height = 20;
 
         List<GameObject> newGrid = new List<GameObject>();
 

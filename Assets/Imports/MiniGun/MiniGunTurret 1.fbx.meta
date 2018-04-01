@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 4a91ee98123d7e84e805c9a055acb457
+timeCreated: 1522603827
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Arms
+    100002: Barrels
+    100004: Base
+    100006: Cylinder.002
+    100008: Cylinder.003
+    100010: Cylinder.004
+    100012: Cylinder.005
+    100014: Cylinder.006
+    100016: Cylinder.007
+    100018: Cylinder.008
+    100020: Cylinder.010
+    100022: Cylinder.011
+    100024: Cylinder.012
+    100026: MainBody
+    100028: //RootNode
+    100030: PartToRotate
+    100032: PivotPoint
+    400000: Arms
+    400002: Barrels
+    400004: Base
+    400006: Cylinder.002
+    400008: Cylinder.003
+    400010: Cylinder.004
+    400012: Cylinder.005
+    400014: Cylinder.006
+    400016: Cylinder.007
+    400018: Cylinder.008
+    400020: Cylinder.010
+    400022: Cylinder.011
+    400024: Cylinder.012
+    400026: MainBody
+    400028: //RootNode
+    400030: PartToRotate
+    400032: PivotPoint
+    2100000: Material.006
+    2100002: Material.005
+    2100004: Material.004
+    2100006: Material.003
+    2100008: Material.007
+    2300000: Arms
+    2300002: Barrels
+    2300004: Base
+    2300006: Cylinder.002
+    2300008: Cylinder.003
+    2300010: Cylinder.004
+    2300012: Cylinder.005
+    2300014: Cylinder.006
+    2300016: Cylinder.007
+    2300018: Cylinder.008
+    2300020: Cylinder.010
+    2300022: Cylinder.011
+    2300024: Cylinder.012
+    2300026: MainBody
+    2300028: PartToRotate
+    2300030: PivotPoint
+    3300000: Arms
+    3300002: Barrels
+    3300004: Base
+    3300006: Cylinder.002
+    3300008: Cylinder.003
+    3300010: Cylinder.004
+    3300012: Cylinder.005
+    3300014: Cylinder.006
+    3300016: Cylinder.007
+    3300018: Cylinder.008
+    3300020: Cylinder.010
+    3300022: Cylinder.011
+    3300024: Cylinder.012
+    3300026: MainBody
+    3300028: PartToRotate
+    3300030: PivotPoint
+    4300000: Base
+    4300002: PartToRotate
+    4300004: PivotPoint
+    4300006: MainBody
+    4300008: Barrels
+    4300010: Cylinder.012
+    4300012: Cylinder.011
+    4300014: Cylinder.010
+    4300016: Cylinder.007
+    4300018: Cylinder.008
+    4300020: Cylinder.006
+    4300022: Cylinder.005
+    4300024: Cylinder.004
+    4300026: Cylinder.003
+    4300028: Cylinder.002
+    4300030: Arms
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 7fc696a4efa1c0445b61fc586a5a61de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 12d0405f877423649aa36240c0ce1273, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: 7fc696a4efa1c0445b61fc586a5a61de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 7cd356bf968dc7a4d92472c6ee5a159e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 12d0405f877423649aa36240c0ce1273, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
