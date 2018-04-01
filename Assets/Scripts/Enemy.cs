@@ -4,15 +4,11 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour {
 
     public float startSpeed = 10f;
-    public float startHealthInspector = 100f;
     public static float startHealth = 100f;
     public static int startKillReward = 1;
 
-    [HideInInspector]
     public float speed;
-    [HideInInspector]
     public float health;
-    [HideInInspector]
     public int killReward;
 
     float red = 0;
@@ -60,7 +56,7 @@ public class Enemy : MonoBehaviour {
         //Change healthAmountText
         healthAmountText.text = health.ToString("n0");
 
-        if (health <= 0 || !isDead)
+        if (health <= 0 && !isDead)
         {
             Die();
         }
