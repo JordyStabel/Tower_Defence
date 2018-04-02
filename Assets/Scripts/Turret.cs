@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour {
 
     [Header("General")]
     public float range = 15f;
+    public GameObject ShotSound;
 
     [Header("Use Bullets (default)")]
     public float fireRate = 1f;
@@ -34,6 +35,9 @@ public class Turret : MonoBehaviour {
 
     public Transform firePoint;
     public GameObject muzzleFlash;
+
+    private int frameBeforeShot = 5;
+    private int currentShotFrame; 
 
     // Use this for initialization
     void Start ()
@@ -180,6 +184,16 @@ public class Turret : MonoBehaviour {
 
     void ShootRaycast()
     {
+        if (currentShotFrame == 0)
+        {
+            GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+            currentShotFrame = frameBeforeShot;
+        }
+        else
+        {
+            currentShotFrame--;
+        }
+        
         RaycastHit hit;
         if (Physics.Raycast(firePoint.transform.position, firePoint.transform.forward, out hit, range))
         {

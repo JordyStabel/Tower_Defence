@@ -2,11 +2,13 @@
 
 public class CameraController : MonoBehaviour {
 
-    public float panSpeed = 30f;
-    public float panBorderThickness = 10f;
-    public float scrollSpeed = 5f;
-    public float minY = 10f;
-    public float maxY = 100f;
+    public float panSpeed = 20f;
+    public float scrollSpeed = 3f;
+    public float rotateSpeed = 50f;
+    public Vector2 scrollLimit;
+    public Vector2 panLimit;
+
+    public Transform target;
 
     private bool movementAllowed = true;
 	
@@ -44,46 +46,46 @@ public class CameraController : MonoBehaviour {
         if (!movementAllowed)
             return;
 
-        //Move camera in dirrection of key or mouse input
-        if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness)
-        {
-            transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
-        }
-        if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThickness)
-        {
-            transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
-        }
-        if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThickness)
-        {
-            transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);
-        }
-        if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness)
-        {
-            transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
-        }
+        Vector3 currentPosition = transform.position;
 
-        ////Turn the camera
-        //if (Input.GetKey("q"))
-        //{
-        //    Vector3 rotateValue = new Vector3(panSpeed * Time.deltaTime, -0.05f);
-        //    transform.eulerAngles = transform.eulerAngles - rotateValue;
-        //}
-        //if (Input.GetKey("e"))
-        //{
-        //    Vector3 rotateValue = new Vector3(panSpeed * Time.deltaTime, 1);
-        //    transform.eulerAngles = transform.eulerAngles - rotateValue;
-        //}
+        //Move camera in dirrection of key or mouse input
+        if (Input.GetKey("w"))
+        {
+            currentPosition.z += (panSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey("s"))
+        {
+            currentPosition.z -= (panSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey("d"))
+        {
+            currentPosition.x += (panSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey("a"))
+        {
+            currentPosition.x -= (panSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey("e"))
+        {
+            transform.RotateAround(target.position, Vector3.up, (rotateSpeed * Time.deltaTime));
+        }
+        if (Input.GetKey("q"))
+        {
+            transform.RotateAround(target.position, Vector3.down, (rotateSpeed * Time.deltaTime));
+        }
 
         //Get scrollwheel input
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        Vector3 position = transform.position;
-
         //Set zoom level (height of camera), with min and max values
-        position.y -= scroll * 1000 * scrollSpeed * Time.deltaTime;
-        position.y = Mathf.Clamp(position.y, minY, maxY);
+        currentPosition.y -= scroll * 1000 * scrollSpeed * Time.deltaTime;
+        currentPosition.y = Mathf.Clamp(currentPosition.y, scrollLimit.x, scrollLimit.y);
 
-        //Set camera posistion equal to scroll input
-        transform.position = position;
+        //Implement limits for the camera
+        currentPosition.x = Mathf.Clamp(currentPosition.x, -panLimit.x, panLimit.x);
+        currentPosition.z = Mathf.Clamp(currentPosition.z, -panLimit.y, panLimit.y);
+
+        //Set camera posistion equal the new currentPosition
+        transform.position = currentPosition;
     }
 }
