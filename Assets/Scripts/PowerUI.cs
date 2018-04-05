@@ -13,7 +13,7 @@ public class PowerUI : MonoBehaviour {
     {
         if (!GameManager.GameIsOver)
         {
-            powerText.text = PlayerStats.power.ToString("n0") + "/" + PlayerStats.strPower.ToString();
+            powerText.text = "POWER: " + PlayerStats.power.ToString("n0") + "/" + PlayerStats.strPower.ToString("n0");
             powerBar.fillAmount = PlayerStats.power / PlayerStats.strPower;
         }
     }

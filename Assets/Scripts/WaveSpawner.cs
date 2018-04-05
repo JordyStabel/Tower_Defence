@@ -13,10 +13,16 @@ public class WaveSpawner : MonoBehaviour {
 
     public Text waveCountdownText;
 
-    private int waveNumber = 0;
+    private int waveNumber = 1;
     private int waveMultiplier = 1;
 
     public GameManager gameManager;
+
+    void Start()
+    {
+        //This fixes a bug where the enemyCount whould still be >0 and thus not spawn any enemies
+        enemyCount = 0;   
+    }
 
     /// <summary>
     /// Create new waves of enemies
@@ -29,7 +35,7 @@ public class WaveSpawner : MonoBehaviour {
 
         if (waveNumber == waves.Length)
         {
-            waveNumber = 0;
+            waveNumber = 1;
             waveMultiplier++;
             gameManager.CompleteLevel();
         }
@@ -57,7 +63,7 @@ public class WaveSpawner : MonoBehaviour {
     IEnumerator SpawnWave()
     {
         //Selects a wave depending on the wavenumber
-        Wave wave = waves[waveNumber];
+        Wave wave = waves[waveNumber - 1];
 
         enemyCount = wave.enemyCount;
 

@@ -25,6 +25,4 @@ public class PlayerStats : MonoBehaviour {
         strPower = startPower;
         wavesSurvived = 0;
     }
-
-
 }
