@@ -6,6 +6,10 @@ public class GenerateLevel : MonoBehaviour
 {
 
     public GameObject node;
+    public GameObject road;
+    public GameObject wayPoint;
+    public GameObject start;
+    public GameObject end;
 
     public Transform spawnPoint;
     public Vector3 startPosition = new Vector3(1, 0, 1);
@@ -23,11 +27,13 @@ public class GenerateLevel : MonoBehaviour
 
     public void generateLevel()
     {
-        int width = 20;
-        int height = 20;
+        int width = 10 ;
+        int height = 10;
 
         List<GameObject> newGrid = new List<GameObject>();
 
+        Instantiate(start, new Vector3(25, 0, 25), Quaternion.identity);
+        Instantiate(end, new Vector3(70, 0, 70), Quaternion.identity);
 
         for (int i = 0; i < width; i++)
         {
@@ -35,6 +41,7 @@ public class GenerateLevel : MonoBehaviour
             {
                 node.name = i.ToString() + x.ToString();
                 newGrid.Add((GameObject)Instantiate(node, new Vector3(25 + (i * 5.0F), 0, 25 + (x * 5.0F)), Quaternion.identity));
+                Debug.Log(node.transform.position);
             }
         }
 
@@ -42,27 +49,19 @@ public class GenerateLevel : MonoBehaviour
 
         path.Add(25);
         path.Add(37);
-        path.Add(59);
-        path.Add(72);
-        path.Add(83);
+        path.Add(58);
+        path.Add(66);
+        path.Add(82);
         path.Add(99);
 
         int startNodeIndex = 0;
 
-
-        //for (int i = 0; i < 1; i++)
+        //for (int i = 0; i < 5; i++)
         //{
-        //    path.Add(Random.Range(0 , 99)); //change back to 99
+        //    path.Add(Random.Range(0, 99)); //change back to 99
         //}
 
         //path.Sort();
-
-        //foreach (int delelteNode in path)
-        //{
-        //    Destroy(newGrid[delelteNode]);
-        //}
-
-        
 
         foreach (int deleteNode in path)
         {
@@ -342,8 +341,9 @@ public class GenerateLevel : MonoBehaviour
         int _return = 0;
         for (int i = start; i < end; i++)
         {
-            //Destroy(nodes[i]);
-            nodes[i].GetComponent<Renderer>().material.color = Color.yellow;
+            Instantiate(road, nodes[i].transform.position, Quaternion.identity);
+            Instantiate(wayPoint, nodes[i].transform.position, Quaternion.identity);
+            Destroy(nodes[i]);
             _return = i;
         }
         return _return;
@@ -357,8 +357,8 @@ public class GenerateLevel : MonoBehaviour
         int _return = 0;
         for (int i = start; i > end; i--)
         {
-            //Destroy(nodes[i]);
-            nodes[i].GetComponent<Renderer>().material.color = Color.red;
+            Instantiate(road, nodes[i].transform.position, Quaternion.identity);
+            Destroy(nodes[i]);
             _return = i;
         }
         return _return;
@@ -370,8 +370,8 @@ public class GenerateLevel : MonoBehaviour
         int _return = 0;
         for (int i = start; i <= end; i += 10)
         {
-            //Destroy(nodes[i]);
-            nodes[i].GetComponent<Renderer>().material.color = Color.blue;
+            Instantiate(road, nodes[i].transform.position, Quaternion.identity);
+            Destroy(nodes[i]);
             _return = i;
         }
         return _return;

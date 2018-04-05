@@ -7,6 +7,7 @@ public class Shop : MonoBehaviour {
     public TurretBlueprint missileLauncher;
     public TurretBlueprint laserBeamer;
     public TurretBlueprint miniGun;
+    public TurretBlueprint windMill;
 
     BuildManager buildManager;
 
@@ -52,5 +53,14 @@ public class Shop : MonoBehaviour {
     {
         Debug.Log("Minigun Turret has been selected");
         buildManager.SelectTurretToBuild(miniGun);
+    }
+
+    /// <summary>
+    /// Select 'windMillTurret'
+    /// </summary>
+    public void SelectWindMillTurret()
+    {
+        Debug.Log("Windmill has been selected");
+        buildManager.SelectTurretToBuild(windMill);
     }
 }

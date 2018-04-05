@@ -5,11 +5,15 @@ using UnityEngine;
 public class Turret : MonoBehaviour {
 
     private Transform target;
+    [HideInInspector]
     public Enemy targetEnemy;
 
     [Header("General")]
     public float range = 15f;
     public GameObject ShotSound;
+
+    [Header("Power usage per shot or per second of firing")]
+    public float turretPowerUsage = 1f;
 
     [Header("Use Bullets (default)")]
     public float fireRate = 1f;
@@ -37,7 +41,7 @@ public class Turret : MonoBehaviour {
     public GameObject muzzleFlash;
 
     private int frameBeforeShot = 5;
-    private int currentShotFrame; 
+    private int currentShotFrame;
 
     // Use this for initialization
     void Start ()
@@ -85,8 +89,12 @@ public class Turret : MonoBehaviour {
     /// </summary>
 	void Update ()
     {
+        //If power is less than 0, turret stops working
+        if (PlayerStats.power <= 0f)
+            return;
+
         //Do nothing if target there is no target
-		if (target == null)
+        if (target == null)
         {
             if (useLaser)
             {
@@ -99,30 +107,33 @@ public class Turret : MonoBehaviour {
             }
             return;
         }
-
-        LockOnTarget();
-
-        if (useLaser)
-        {
-            Laser();
-        }
+        //Turret has a target
         else
         {
-            //Only shoot if fireCountdown <= 0 (creates a firerate)
-            if (fireCountdown <= 0f)
+            LockOnTarget();
+
+            if (useLaser)
             {
-                if (!useRaycast)
-                {
-                    Shoot();
-                }
-                else
-                {
-                    ShootRaycast();
-                }
-                fireCountdown = 1f / fireRate;
+                Laser();
             }
-            //Decrease fireCountdown with the time it took between frames
-            fireCountdown -= Time.deltaTime;
+            else
+            {
+                //Only shoot if fireCountdown <= 0 (creates a firerate)
+                if (fireCountdown <= 0f)
+                {
+                    if (!useRaycast)
+                    {
+                        Shoot();
+                    }
+                    else
+                    {
+                        ShootRaycast();
+                    }
+                    fireCountdown = 1f / fireRate;
+                }
+                //Decrease fireCountdown with the time it took between frames
+                fireCountdown -= Time.deltaTime;
+            }
         }
     }
 
@@ -163,6 +174,9 @@ public class Turret : MonoBehaviour {
         Vector3 direction = firePoint.position - target.position;
         impactEffect.transform.position = target.position + direction.normalized;
         impactEffect.transform.rotation = Quaternion.LookRotation(direction);
+
+        //While firing deduct power
+        PlayerStats.power -= turretPowerUsage * Time.deltaTime;
     }
 
     /// <summary>
@@ -180,6 +194,9 @@ public class Turret : MonoBehaviour {
         {
             bullet.Lock_On(target);
         }
+
+        //Deduct power per shot
+        PlayerStats.power -= turretPowerUsage;
     }
 
     void ShootRaycast()
@@ -209,5 +226,8 @@ public class Turret : MonoBehaviour {
                 hit.collider.GetComponent<Enemy>().TakeDamage(damage);
             }
         }
+
+        //While firing deduct power
+        PlayerStats.power -= turretPowerUsage * Time.deltaTime;
     }
 }

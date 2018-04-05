@@ -8,6 +8,10 @@ public class PlayerStats : MonoBehaviour {
     public static int Money;
     public int startMoney = 400;
 
+    public static float power;
+    public float startPower = 100f;
+    public static float strPower;
+
     public static int Lives;
     public int startLives = 20;
 
@@ -17,6 +21,10 @@ public class PlayerStats : MonoBehaviour {
     {
         Money = startMoney;
         Lives = startLives;
+        power = startPower;
+        strPower = startPower;
         wavesSurvived = 0;
     }
+
+
 }
