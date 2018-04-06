@@ -1,53 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class Resource : MonoBehaviour {
 
-    // We can make Quantity private so it can only be changed through the AddAmount() and RemoveAmount() methods
-    // By adding [SerializeField] it will still get stored and displayed in the editor (normally this only happens
-    // to fields marked Public).
-    [SerializeField] private int quantity;
-    public int InitialQuantity;
+    [SerializeField] private float amount;
+    public float startAmount;
 
-    // Unity Events are a Unity implementation of C#-like events that work with
-    // Unity's serialization system (meaning you can save them in the editor)
-    // Multiple methods can 'Subscribe' to a UnityEvent, and when it is invoked
-    // each of these methods are executed.
     public UnityEvent OnValueChanged = new UnityEvent();
 
     void Awake()
     {
-        quantity = InitialQuantity;
+        amount = startAmount;
     }
 
-    public void AddAmount(int value)
+    public void AddAmount(float value)
     {
-        quantity += value;
+        amount += value;
         updateUI();
     }
 
-    public void RemoveAmount(int value)
+    public void RemoveAmount(float value)
     {
-        quantity -= value;
+        amount -= value;
         updateUI();
     }
 
-    public bool CanAfford(int cost)
+    public bool CanAfford(float cost)
     {
-        return quantity >= cost;
+        return amount >= cost;
     }
 
-    // Since we made quantity private, provide access to reading the value here.
-    public int GetQuantity()
+    public float getAmount()
     {
-        return quantity;
+        return amount;
     }
-
 
     void updateUI()
     {
-        OnValueChanged.Invoke(); // Invoke the event.
+        OnValueChanged.Invoke();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour {
@@ -17,6 +18,8 @@ public class WaveSpawner : MonoBehaviour {
     private int waveMultiplier = 1;
 
     public GameManager gameManager;
+
+    public List<GameObject> allEnemies;
 
     void Start()
     {
@@ -92,5 +95,6 @@ public class WaveSpawner : MonoBehaviour {
     void SpawnEnemy(GameObject enemy)
     {
         Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        allEnemies.Add(enemy);
     }
 }
