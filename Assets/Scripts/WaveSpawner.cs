@@ -13,7 +13,7 @@ public class WaveSpawner : MonoBehaviour {
 
     public Text waveCountdownText;
 
-    private int waveNumber = 1;
+    private int waveNumber = 0;
     private int waveMultiplier = 1;
 
     public GameManager gameManager;
@@ -35,7 +35,7 @@ public class WaveSpawner : MonoBehaviour {
 
         if (waveNumber == waves.Length)
         {
-            waveNumber = 1;
+            waveNumber = 0;
             waveMultiplier++;
             gameManager.CompleteLevel();
         }
@@ -63,7 +63,7 @@ public class WaveSpawner : MonoBehaviour {
     IEnumerator SpawnWave()
     {
         //Selects a wave depending on the wavenumber
-        Wave wave = waves[waveNumber - 1];
+        Wave wave = waves[waveNumber];
 
         enemyCount = wave.enemyCount;
 

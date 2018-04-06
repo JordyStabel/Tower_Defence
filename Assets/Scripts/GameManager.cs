@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour {
     public GameObject gameOverUI;
     public GameObject completedLevelUI;
 
+    private bool gameRunning = true;
+    private float second = 2.5f;
+
     void Start()
     {
         GameIsOver = false;
@@ -16,6 +19,14 @@ public class GameManager : MonoBehaviour {
 	
 	// Checks if there are enough lives left
 	void Update () {
+
+        if (!gameRunning)
+        {
+            second -= Time.deltaTime;
+            Debug.Log("Time" + second);
+        }
+
+        Toggle();
 
         //If game has ended return
         if (GameIsOver)
@@ -40,5 +51,32 @@ public class GameManager : MonoBehaviour {
     {
         GameIsOver = true;
         completedLevelUI.SetActive(true);
+        Toggle();
+    }
+
+    public void Continue()
+    {
+        completedLevelUI.SetActive(false);
+        GameIsOver = false;
+        Toggle();
+    }
+
+    //Toggle time on and off
+    public void Toggle()
+    {
+        if (completedLevelUI.activeSelf)
+        {
+            gameRunning = false;
+            if (second <= 0)
+            {
+                Time.timeScale = 0f;
+            }
+        }
+        else if (!GameIsOver && completedLevelUI.activeSelf)
+        {
+            Time.timeScale = 1f;
+            gameRunning = true;
+            second = 2.5f;
+        }
     }
 }

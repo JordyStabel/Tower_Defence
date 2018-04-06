@@ -79,7 +79,6 @@ public class Enemy : MonoBehaviour {
         isDead = true;
 
         PlayerStats.Money += killReward;
-        Debug.Log(killReward);
 
         //Create new death effect object at location of the enemy
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
