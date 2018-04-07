@@ -19,12 +19,21 @@ public class WaveSpawner : MonoBehaviour {
 
     public GameManager gameManager;
 
-    public List<GameObject> allEnemies;
+    public List<Enemy> allEnemies = new List<Enemy>();
+
+    private int index = 0;
 
     void Start()
     {
         //This fixes a bug where the enemyCount whould still be >0 and thus not spawn any enemies
-        enemyCount = 0;   
+        enemyCount = 0;
+
+        EventManager.onEnemyDie += deleteEnemy;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.onEnemyDie -= deleteEnemy;
     }
 
     /// <summary>
@@ -87,14 +96,23 @@ public class WaveSpawner : MonoBehaviour {
         PlayerStats.wavesSurvived++;
 
         waveNumber++;
+        index = 0;
     }
 
     /// <summary>
     /// Create new enemy object at the starting point
     /// </summary>
-    void SpawnEnemy(GameObject enemy)
+    void SpawnEnemy(Enemy enemy)
     {
+        EventManager.EnemySpawn(this.index);
         Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        enemy.index = index;
         allEnemies.Add(enemy);
+        index++;
+    }
+
+    void deleteEnemy(int index)
+    {
+        allEnemies.RemoveAll(e => e.index == index);
     }
 }

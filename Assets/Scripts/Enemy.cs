@@ -20,7 +20,9 @@ public class Enemy : MonoBehaviour {
     public Image healthBar;
     public Text healthAmountText;
 
-    private bool isDead = false;
+    public bool isDead = false;
+
+    public int index;
 
     void Start()
     {
@@ -28,6 +30,13 @@ public class Enemy : MonoBehaviour {
         health = startHealth;
         killReward = startKillReward;
         healthAmountText.text = health.ToString("n0");
+
+        EventManager.onEnemySpawn += setIndex;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.onEnemySpawn -= setIndex;
     }
 
     /// <summary>
@@ -80,6 +89,8 @@ public class Enemy : MonoBehaviour {
 
         PlayerStats.Money += killReward;
 
+        EventManager.EnemyDeath(this.index);
+
         //Create new death effect object at location of the enemy
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
@@ -87,5 +98,10 @@ public class Enemy : MonoBehaviour {
         WaveSpawner.enemyCount--;
 
         Destroy(gameObject);
+    }
+
+    void setIndex(int _index)
+    {
+        this.index = _index;
     }
 }

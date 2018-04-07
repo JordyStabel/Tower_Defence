@@ -43,8 +43,6 @@ public class Turret : MonoBehaviour {
     private int frameBeforeShot = 5;
     private int currentShotFrame;
 
-    WaveSpawner waveSpawner;
-
     // Use this for initialization
     void Start ()
     {
