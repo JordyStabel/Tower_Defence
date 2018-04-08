@@ -12,13 +12,17 @@ public class RoadMarker : MonoBehaviour {
     private int random;
     private bool created = false;
 
+    public float waitTime = 10f;
+
     private void Start()
     {
+        //Removes all useless stuff after creating the path
+        Destroy(gameObject, waitTime);
         //Get the roadtemplate object form the hierarchy only during the start of this object
         roadTemplates = GameObject.FindGameObjectWithTag("Roads").GetComponent<RoadTemplates>();
 
         //Call the CreateRoad methode with 0.2 seconds delay
-        Invoke("CreateRoad", .25f);
+        Invoke("CreateRoad", .15f);
     }
 
     void CreateRoad()
@@ -48,6 +52,7 @@ public class RoadMarker : MonoBehaviour {
                 //Need to spawn road with RIGHT opening
                 random = Random.Range(0, roadTemplates.rightRoads.Length);
                 Instantiate(roadTemplates.rightRoads[random], transform.position, roadTemplates.rightRoads[random].transform.rotation);
+
             }
             created = true;
         }

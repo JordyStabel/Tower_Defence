@@ -11,7 +11,7 @@ public class RoadTemplates : MonoBehaviour {
 
     public GameObject endRoad;
 
-    public float waitTime = .5f;
+    public float waitTime = .75f;
     private bool endCreated = false;
 
     public List<GameObject> roads;
@@ -32,11 +32,18 @@ public class RoadTemplates : MonoBehaviour {
                     roadToDestroy = roads[i];
                     lastNode = roads[i - 1];
                     endPos = roadToDestroy.transform.position;
+                    roads.Remove(roadToDestroy);
                     Destroy(roadToDestroy);
                     Debug.Log(lastNode);
                     endNode = Instantiate(endRoad, endPos, Quaternion.identity);
+                    roads.Add(endNode);
                     endNode.transform.LookAt(lastNode.transform.position);
                     endCreated = true;
+
+                    foreach (GameObject road in roads)
+                    {
+                        Waypoints.waypoints.Add(road.transform);
+                    }
                 }
             }
         }

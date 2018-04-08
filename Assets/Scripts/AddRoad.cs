@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AddRoad : MonoBehaviour {
 
@@ -10,7 +8,6 @@ public class AddRoad : MonoBehaviour {
     {
         roadTemplates = GameObject.FindGameObjectWithTag("Roads").GetComponent<RoadTemplates>();
         roadTemplates.roads.Add(this.gameObject);
-        roadTemplates.waitTime = .5f;
-        Debug.Log(roadTemplates.waitTime);
+        roadTemplates.waitTime = .75f;
 	}
 }
