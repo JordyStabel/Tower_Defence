@@ -18,7 +18,7 @@ public class RoadMarker : MonoBehaviour {
         roadTemplates = GameObject.FindGameObjectWithTag("Roads").GetComponent<RoadTemplates>();
 
         //Call the CreateRoad methode with 0.2 seconds delay
-        Invoke("CreateRoad", 1f);
+        Invoke("CreateRoad", .25f);
     }
 
     void CreateRoad()
@@ -55,16 +55,10 @@ public class RoadMarker : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision)
     {
-        //If a road collides with another road this roadmarker will get destroyed, thus stop making other roads
-        if (collision.CompareTag("RoadMarkerTag"))
+        //If a road collides with another road this roadmarker or center of the road prefab will get destroyed, thus stop making other roads
+        if (collision.CompareTag("RoadMarkerTag") || collision.CompareTag("Center"))
         {
             Destroy(gameObject);
-        }
-        else if (collision.CompareTag("Center"))
-        {
-            Destroy(gameObject);
-            Debug.Log("End the path here");
-            //End Road prefab needs to be spawn here
         }
     }
 }
