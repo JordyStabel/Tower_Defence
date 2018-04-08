@@ -40,10 +40,12 @@ public class RoadTemplates : MonoBehaviour {
                     endNode.transform.LookAt(lastNode.transform.position);
                     endCreated = true;
 
-                    foreach (GameObject road in roads)
-                    {
-                        Waypoints.waypoints.Add(road.transform);
-                    }
+                    //TODO: Implement this in a different script, only for randomly generated maps
+
+                    //foreach (GameObject road in roads)
+                    //{
+                    //    Waypoints.waypoints.Add(road.transform);
+                    //}
                 }
             }
         }

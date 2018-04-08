@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour {
     void GetNextWaypoint()
     {
         //Destroy the object when it reaches the end of the map (no more waypoints)
-        if (waypointIndex >= Waypoints.waypoints.Count - 1)
+        if (waypointIndex >= Waypoints.waypoints.Length - 1)
         {
             EndPath();
             return;

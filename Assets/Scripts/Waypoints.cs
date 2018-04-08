@@ -4,15 +4,16 @@ using System.Collections.Generic;
 
 public class Waypoints : MonoBehaviour {
 
-    public static List<Transform> waypoints;
+    public static Transform[] waypoints;
+    //public static List<Transform> waypoints;
 
     /// <summary>
     /// Create list of waypoints
     /// </summary>
     void Awake()
     {
-        waypoints = new List<Transform>();
-        for (int i = 0; i < waypoints.Count; i++)
+        waypoints = new Transform[transform.childCount];
+        for (int i = 0; i < waypoints.Length; i++)
         {
             waypoints[i] = transform.GetChild(i);
         }
