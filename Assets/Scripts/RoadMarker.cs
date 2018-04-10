@@ -53,7 +53,7 @@ public class RoadMarker : MonoBehaviour {
                 random = Random.Range(0, roadTemplates.rightRoads.Length);
                 Instantiate(roadTemplates.rightRoads[random], transform.position, roadTemplates.rightRoads[random].transform.rotation);
 
-            } 
+            }
             created = true;
         }
     }
