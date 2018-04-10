@@ -8,7 +8,8 @@ public class Bullet : MonoBehaviour {
     public int damage = 50;
     public float explosiveRadius = 0f;
     public GameObject impactEffect;
-    
+    public GameObject ShotSound;
+
     /// <summary>
     /// Set target for bullet to follow
     /// </summary>
@@ -89,6 +90,8 @@ public class Bullet : MonoBehaviour {
     /// </summary>
     void Explode()
     {
+        GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+
         //Create list of all object that are in range of the explosion
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosiveRadius);
         //Loop through list of all effected targets/enemies --> destroy them

@@ -40,6 +40,9 @@ public class Turret : MonoBehaviour {
     public Transform firePoint;
     public GameObject muzzleFlash;
 
+    private int frameBeforeShotLaser = 120;
+    private int currentShotFrameLaser;
+
     private int frameBeforeShot = 5;
     private int currentShotFrame;
 
@@ -155,14 +158,14 @@ public class Turret : MonoBehaviour {
     /// </summary>
     void Laser()
     {
-        if (currentShotFrame == 0)
+        if (currentShotFrameLaser == 0)
         {
             GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
-            currentShotFrame = frameBeforeShot;
+            currentShotFrameLaser = frameBeforeShotLaser;
         }
         else
         {
-            currentShotFrame--;
+            currentShotFrameLaser --;
         }
 
         //Damage the enemy a little bit each time
