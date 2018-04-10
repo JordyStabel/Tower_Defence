@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour {
     {
         enemy = GetComponent<Enemy>();
 
-        target = Waypoints.waypoints[0];
+        target = Waypoints.waypointsPremade[0];
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour {
     void GetNextWaypoint()
     {
         //Destroy the object when it reaches the end of the map (no more waypoints)
-        if (waypointIndex >= Waypoints.waypoints.Length - 1)
+        if (waypointIndex >= Waypoints.waypointsPremade.Length - 1)
         {
             EndPath();
             return;
@@ -51,7 +51,7 @@ public class EnemyMovement : MonoBehaviour {
 
         //Move on the next waypoint
         waypointIndex++;
-        target = Waypoints.waypoints[waypointIndex];
+        target = Waypoints.waypointsPremade[waypointIndex];
     }
 
     //Decrease the lives and destroy the object

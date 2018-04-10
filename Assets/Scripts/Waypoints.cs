@@ -4,18 +4,18 @@ using System.Collections.Generic;
 
 public class Waypoints : MonoBehaviour {
 
-    public static Transform[] waypoints;
-    //public static List<Transform> waypoints;
+    public static Transform[] waypointsPremade;
+    public static List<Transform> waypointsRandom;
 
     /// <summary>
     /// Create list of waypoints
     /// </summary>
     void Awake()
     {
-        waypoints = new Transform[transform.childCount];
-        for (int i = 0; i < waypoints.Length; i++)
+        waypointsPremade = new Transform[transform.childCount];
+        for (int i = 0; i < waypointsPremade.Length; i++)
         {
-            waypoints[i] = transform.GetChild(i);
+            waypointsPremade[i] = transform.GetChild(i);
         }
     }
 }

@@ -9,8 +9,9 @@ public class WaveSpawner : MonoBehaviour {
     public Wave[] waves;
     public Transform spawnPoint;
 
-    public float timeBetweenWaves = 5f;
-    private float countDown = 5f;
+    public float timeBetweenWaves = 2f;
+    public float firstCountDown = 10f;
+    private float countDown = 2f;
 
     public Text waveCountdownText;
 
@@ -27,6 +28,7 @@ public class WaveSpawner : MonoBehaviour {
     {
         //This fixes a bug where the enemyCount whould still be >0 and thus not spawn any enemies
         enemyCount = 0;
+        countDown = firstCountDown;
 
         EventManager.onEnemyDie += deleteEnemy;
     }
@@ -65,7 +67,7 @@ public class WaveSpawner : MonoBehaviour {
         countDown = Mathf.Clamp(countDown, 0f, Mathf.Infinity);
 
         //Set timer text equal to the countDown
-        waveCountdownText.text = string.Format("{0:00.00}", countDown);
+        waveCountdownText.text = string.Format("{0:00.00}     ", countDown);
     }
 
     /// <summary>

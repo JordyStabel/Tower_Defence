@@ -11,7 +11,7 @@ public class RoadTemplates : MonoBehaviour {
 
     public GameObject endRoad;
 
-    public float waitTime = .75f;
+    public float waitTime = 60f;
     private bool endCreated = false;
 
     public List<GameObject> roads;
@@ -23,6 +23,8 @@ public class RoadTemplates : MonoBehaviour {
 
     void Update()
     {
+        Debug.Log(waitTime);
+
         if (waitTime <= 0)
         {
             for (int i = 0; i < roads.Count; i++)
@@ -40,12 +42,12 @@ public class RoadTemplates : MonoBehaviour {
                     endNode.transform.LookAt(lastNode.transform.position);
                     endCreated = true;
 
-                    //TODO: Implement this in a different script, only for randomly generated maps
-
-                    //foreach (GameObject road in roads)
-                    //{
-                    //    Waypoints.waypoints.Add(road.transform);
-                    //}
+                    //Set the array size equal to the number of roads created
+                    Waypoints.waypointsPremade = new Transform[roads.Count];
+                    for (int j = 0; i < Waypoints.waypointsPremade.Length; j++)
+                    {
+                        Waypoints.waypointsPremade[j] = roads[j].transform;
+                    }
                 }
             }
         }

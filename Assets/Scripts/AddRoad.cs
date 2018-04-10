@@ -8,6 +8,6 @@ public class AddRoad : MonoBehaviour {
     {
         roadTemplates = GameObject.FindGameObjectWithTag("Roads").GetComponent<RoadTemplates>();
         roadTemplates.roads.Add(this.gameObject);
-        roadTemplates.waitTime = .75f;
+        roadTemplates.waitTime = 1f;
 	}
 }
