@@ -23,8 +23,6 @@ public class RoadTemplates : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log(waitTime);
-
         if (waitTime <= 0)
         {
             for (int i = 0; i < roads.Count; i++)

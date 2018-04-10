@@ -29,7 +29,7 @@ public class EnemyMovement : MonoBehaviour {
         transform.Translate(direction.normalized * enemy.speed * Time.deltaTime, Space.World);
 
         //Sets new waypoint/target when in range of the current target/waypoint (0.2f margin to make it smoove)
-        if (Vector3.Distance(transform.position, target.position) <= 0.4f)
+        if (Vector3.Distance(transform.position, target.position) <= 0.5f)
         {
             GetNextWaypoint();
         }

@@ -155,6 +155,16 @@ public class Turret : MonoBehaviour {
     /// </summary>
     void Laser()
     {
+        if (currentShotFrame == 0)
+        {
+            GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+            currentShotFrame = frameBeforeShot;
+        }
+        else
+        {
+            currentShotFrame--;
+        }
+
         //Damage the enemy a little bit each time
         targetEnemy.GetComponent<Enemy>().TakeDamage(damageOverTime * Time.deltaTime);
         targetEnemy.Slow(slowAmount);
@@ -184,6 +194,9 @@ public class Turret : MonoBehaviour {
     /// </summary>
     void Shoot()
     {
+
+        GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+
         //Create direction for the bullet to go
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         //Create new bullet

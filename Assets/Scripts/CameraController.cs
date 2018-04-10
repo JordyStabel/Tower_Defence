@@ -23,7 +23,6 @@ public class CameraController : MonoBehaviour {
             {
                 if (hit.collider.tag == "Enemy")
                 {
-                    Debug.Log("Raycast worked!");
                     hit.collider.GetComponent<Enemy>().TakeDamage(1000);
                 }
             }

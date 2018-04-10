@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class Waypoints : MonoBehaviour {
 
     public static Transform[] waypointsPremade;
-    public static List<Transform> waypointsRandom;
 
     /// <summary>
     /// Create list of waypoints
