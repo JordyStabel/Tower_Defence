@@ -44,6 +44,7 @@ public class RoadTemplates : MonoBehaviour {
                     Waypoints.waypointsPremade = new Transform[roads.Count];
                     for (int j = 0; i < Waypoints.waypointsPremade.Length; j++)
                     {
+                        Transform pos = roads[j].transform;
                         Waypoints.waypointsPremade[j] = roads[j].transform;
                     }
                 }

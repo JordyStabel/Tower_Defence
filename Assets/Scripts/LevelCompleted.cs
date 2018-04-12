@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelCompleted : MonoBehaviour {
 
@@ -19,7 +17,6 @@ public class LevelCompleted : MonoBehaviour {
 
     public void Continue()
     {
-        Debug.Log("LEVEL COMPLETED!");
         PlayerPrefs.SetInt("levelReached", levelToUnlock);
         sceneFader.FadeTo(nextLevel);
     }

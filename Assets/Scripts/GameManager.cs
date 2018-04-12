@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour {
         if (!gameRunning)
         {
             second -= Time.deltaTime;
-            Debug.Log("Time" + second);
         }
 
         Toggle();
