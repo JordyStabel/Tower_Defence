@@ -87,10 +87,10 @@ public class Turret : MonoBehaviour {
         }
     }
 
-	/// <summary>
+    /// <summary>
     /// All turret actions
     /// </summary>
-	void Update ()
+    void Update ()
     {
         //If power is less than 0, turret stops working
         if (PlayerStats.power <= 0f)
