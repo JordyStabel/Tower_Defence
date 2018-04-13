@@ -161,6 +161,7 @@ public class Turret : MonoBehaviour {
         if (currentShotFrameLaser == 0)
         {
             GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+            Destroy(gunShot, 2f);
             currentShotFrameLaser = frameBeforeShotLaser;
         }
         else
@@ -199,6 +200,7 @@ public class Turret : MonoBehaviour {
     {
 
         GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+        Destroy(gunShot, 1.5f);
 
         //Create direction for the bullet to go
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -220,6 +222,7 @@ public class Turret : MonoBehaviour {
         if (currentShotFrame == 0)
         {
             GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+            Destroy(gunShot, 2f);
             currentShotFrame = frameBeforeShot;
         }
         else

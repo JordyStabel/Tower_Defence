@@ -91,6 +91,7 @@ public class Bullet : MonoBehaviour {
     void Explode()
     {
         GameObject gunShot = (GameObject)Instantiate(ShotSound, this.transform.position, this.transform.rotation);
+        Destroy(gunShot, 2f);
 
         //Create list of all object that are in range of the explosion
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosiveRadius);

@@ -7,6 +7,9 @@ public class Node : MonoBehaviour {
     public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
 
+    [Header("Turret Tokens")]
+    public Resource resource;
+
     public GameObject turret;
     [HideInInspector]
     public TurretBlueprint turretBlueprint;
@@ -47,7 +50,6 @@ public class Node : MonoBehaviour {
         GameObject turretDestroyEffect = (GameObject)Instantiate(buildManager.destroyEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(sellEffect, 5f);
         Destroy(turretDestroyEffect, 5f);
-        Debug.Log("Turret sold!");
 
         Destroy(turret);
         turretBlueprint = null;
@@ -85,15 +87,14 @@ public class Node : MonoBehaviour {
     void BuildTurret(TurretBlueprint blueprint)
     {
         //Checks if the player has enough money to build a turret
-        if (PlayerStats.Money < blueprint.cost)
-        {
-            //TODO: Add a visual component to alert the player
-            Debug.Log("Not enough money to build turret");
+        if (PlayerStats.Money < blueprint.cost || resource.GetAmount() < 1)
             return;
-        }
 
         //Deduct the cost
         PlayerStats.Money -= blueprint.cost;
+
+        //Deduct one turret token for each turret bought
+        resource.Remove(1);
 
         //Create new turret at the location of the current Node with no rotation
         GameObject _turret = (GameObject)Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
@@ -105,18 +106,13 @@ public class Node : MonoBehaviour {
         //Create a buildeffect object that can be destroyed again after 5 seconds
         GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 5f);
-        Debug.Log("Turret build!");
     }
 
     public void UpgradeTurret()
     {
-        //Checks if the player has enough money to build a turret
+        //Checks if the player has enough money to build a turret and enough turret tokens
         if (PlayerStats.Money < turretBlueprint.upgradeCost)
-        {
-            //TODO: Add a visual component to alert the player
-            Debug.Log("Not enough money to upgrade turret");
             return;
-        }
 
         //Deduct the cost
         PlayerStats.Money -= turretBlueprint.upgradeCost;
@@ -134,8 +130,6 @@ public class Node : MonoBehaviour {
         Destroy(effect, 5f);
 
         isUpgraded = true;
-
-        Debug.Log("Turret upgraded!");
     }
 
     /// <summary>

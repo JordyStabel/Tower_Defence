@@ -1,42 +1,35 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
-public class Resource : MonoBehaviour {
+public class Resource : MonoBehaviour
+{
+    public int startAmount;
+    [SerializeField]
+    private int amount;
 
-    [SerializeField] private float amount;
-    public float startAmount;
+    public delegate void ChangeAmount();
+    public event ChangeAmount onChange;
 
-    public UnityEvent OnValueChanged = new UnityEvent();
-
-    void Awake()
+    private void Start()
     {
         amount = startAmount;
+        if (onChange != null) onChange();
     }
 
-    public void AddAmount(float value)
-    {
-        amount += value;
-        updateUI();
-    }
-
-    public void RemoveAmount(float value)
-    {
-        amount -= value;
-        updateUI();
-    }
-
-    public bool CanAfford(float cost)
-    {
-        return amount >= cost;
-    }
-
-    public float getAmount()
+    public int GetAmount()
     {
         return amount;
     }
 
-    void updateUI()
+    public void Remove(int _amount)
     {
-        OnValueChanged.Invoke();
+        Debug.Log("Been here");
+        amount -= _amount;
+        if (onChange != null) onChange();
+    }
+
+    public void Add(int _amount)
+    {
+        amount += +amount;
+        if (onChange != null) onChange();
     }
 }

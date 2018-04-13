@@ -13,7 +13,6 @@ public class PowerUI : MonoBehaviour {
 
     private Vector3 pos;
     GameObject effect;
-    GameObject canvas;
 
     private void Start()
     {
